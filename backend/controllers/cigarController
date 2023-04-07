@@ -1,0 +1,42 @@
+const asyncHandler = require('express-async-handler')
+
+//@desc Get cigars
+//@route GET /api/cigars
+//@access Private
+const getCigars = asyncHandler(async (req, res) => {
+    // console.log('GET route works')
+    res.json({ message: 'Get all cigar items' })
+})
+
+//@desc Create cigar
+//@route POST /api/cigars
+//@access Private
+const createCigar = asyncHandler(async (req, res) => {
+    console.log(req.body.text)//testing
+    if (!req.body.text){
+        res.status(400)
+        throw new Error('Please add text field')
+    }
+    res.json({ message: 'Create cigar item' })
+})
+
+//@desc Update cigar
+//@route PUT /api/cigars/:id
+//@access Private
+const updateCigar = asyncHandler(async (req, res) => {
+    // console.log('PUT route works')
+    res.json({ message: `Update  cigar ${req.params.id}` })
+})
+
+//@desc Delete cigars
+//@route DEL /api/cigars/:id
+//@access Private
+const deleteCigar = asyncHandler(async (req, res) => {
+    // console.log('DEL route works')
+    res.json({ message: `Delete  cigar ${req.params.id}` })
+})
+
+
+module.exports = {
+    getCigars, createCigar, updateCigar, deleteCigar
+} 
