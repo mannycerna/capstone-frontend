@@ -1,23 +1,68 @@
 const asyncHandler = require('express-async-handler')
 
+const Cigar = require('../models/cigarModel')
+
 //@desc Get cigars
 //@route GET /api/cigars
 //@access Private
 const getCigars = asyncHandler(async (req, res) => {
+    const cigars = await Cigar.find()
     // console.log('GET route works')
-    res.json({ message: 'Get all cigar items' })
+    res.status(200).json( cigars )
 })
+
+//@desc Get cigar by Id
+//@route GET /api/cigars/:id
+//@access Private
+const getCigarById = asyncHandler(async (req, res) => {
+    const cigar = await Cigar.findById(req.params.id)
+    if(!cigar){
+        res.status(400)
+        throw new Error('Cigar not found')
+    }
+    // console.log('GET route works')
+    res.status(200).json( cigar )
+})
+
+//@desc Get cigar by Id
+//@route GET /api/cigars/
+//@access Private
+const getCigarByQuantity = asyncHandler(async (req, res) => {
+    const cigar = await Cigar.find({ quantity: {$lte: 10}})
+    if(!cigar){
+        res.status(400)
+        throw new Error('Cigar not found')
+    }
+    // console.log('GET route works')
+    console.log("almost")
+    res.status(200).json( cigar )
+})
+
 
 //@desc Create cigar
 //@route POST /api/cigars
 //@access Private
 const createCigar = asyncHandler(async (req, res) => {
-    console.log(req.body.text)//testing
-    if (!req.body.text){
+    // console.log(req.body.text)//testing
+    if(!req.body.productid, !req.body.name, !req.body.brand, !req.body.type, 
+        !req.body.size,!req.body.wrapper, !req.body.filler, !req.body.price, !req.body.quantity){
         res.status(400)
-        throw new Error('Please add text field')
+        throw new Error('Please add required fields: id, name, brand, type, size, wrapper, filler, price, quantity')
     }
-    res.json({ message: 'Create cigar item' })
+
+    const cigar = await Cigar.create({
+        productid: req.body.productid,
+        name: req.body.name,
+        brand: req.body.brand,
+        type: req.body.type,
+        size: req.body.size,
+        wrapper: req.body.wrapper,
+        filler: req.body.filler,
+        price: req.body.price,
+        quantity: req.body.quantity,
+    })
+
+    res.status(200).json({ message: 'Create cigar item' })
 })
 
 //@desc Update cigar
@@ -25,7 +70,17 @@ const createCigar = asyncHandler(async (req, res) => {
 //@access Private
 const updateCigar = asyncHandler(async (req, res) => {
     // console.log('PUT route works')
-    res.json({ message: `Update  cigar ${req.params.id}` })
+    const cigar  = await Cigar.findById(req.params.id)
+
+        if(!cigar){
+            res.status(400)
+            throw new Error('Cigar not found')
+        }
+        const updatedInventory = await Cigar.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        })
+   
+    res.status(200).json(updatedInventory)
 })
 
 //@desc Delete cigars
@@ -33,10 +88,18 @@ const updateCigar = asyncHandler(async (req, res) => {
 //@access Private
 const deleteCigar = asyncHandler(async (req, res) => {
     // console.log('DEL route works')
-    res.json({ message: `Delete  cigar ${req.params.id}` })
+    const cigar = await Cigar.findByIdAndDelete(req.params.id)
+    if(!cigar){
+        res.status(400)
+        throw new Error('Cigar not found')
+    }
+
+    // await cigar.remove()
+
+    res.status(200).json( '{ id: req.params.id }' )
 })
 
 
 module.exports = {
-    getCigars, createCigar, updateCigar, deleteCigar
+    getCigars, getCigarById, getCigarByQuantity, createCigar, updateCigar, deleteCigar
 } 

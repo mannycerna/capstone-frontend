@@ -1,9 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const { getCigars, createCigar, updateCigar, deleteCigar } = require('../controllers/cigarController')
+const { getCigars, getCigarById, getCigarByQuantity, createCigar, updateCigar, deleteCigar } = require('../controllers/cigarController')
 
 
 router.get('/', getCigars)
+
+router.get('/:id', getCigarById)
+
+router.get('/quantity', getCigarByQuantity)
 
 router.post('/', createCigar)
 

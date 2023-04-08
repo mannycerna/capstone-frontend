@@ -1,0 +1,32 @@
+const asyncHandler = require('express-async-handler')
+
+const Cigar = require('../models/userModel')
+
+//@desc Register new  user 
+//@route Post  /api/users/
+//@access Public
+const registerUser = (req, res) => {
+    console.log("register user")
+    res.json({ message: 'Register User' })
+
+}
+
+//@desc Authenticate  user 
+//@route Post  /api/users/login
+//@access Public
+const loginUser = (req, res) => {
+    res.json({ message: 'Login  User' })
+
+}
+
+//@desc Get user data 
+//@route Post  /api/users/me
+//@access Public
+const getMe = (req, res) => {
+    res.json({ message: 'Display user data' })
+
+}
+
+module.exports = {
+    registerUser, loginUser, getMe
+} 
