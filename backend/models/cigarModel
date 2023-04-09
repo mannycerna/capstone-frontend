@@ -41,6 +41,11 @@
          type: String,
         required: [true, 'Please insert wrapper name'],
             },
+
+    binder: { 
+         type: String,
+         required: [true, 'Please insert binder name'],
+            },
             
     filler: { 
          type: String,
@@ -53,13 +58,16 @@
             },
 
     quantity: { 
-        type: Number,
+        type: String,
         required: [true, 'Please insert product quantity'],
                    },
     },
 
     {
     timestamps: true,
+    },
+    {
+        strictQuery: true
     }
  )
 

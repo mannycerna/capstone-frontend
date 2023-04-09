@@ -1,19 +1,25 @@
 const express = require('express')
 const router = express.Router()
-const { getCigars, getCigarById, getCigarByQuantity, createCigar, updateCigar, deleteCigar } = require('../controllers/cigarController')
+const { getCigars, 
+        getCigarById, 
+        getCigarByQuantity, 
+        createCigar, 
+        updateCigar, 
+        deleteCigar } = require('../controllers/cigarController')
 
+        const { protect } = require('../middleware/authMiddleware')
 
-router.get('/', getCigars)
+router.get('/', protect, getCigars)
 
-router.get('/:id', getCigarById)
+router.get('/:id', protect, getCigarById)
 
 router.get('/quantity', getCigarByQuantity)
 
-router.post('/', createCigar)
+router.post('/', protect, createCigar)
 
-router.put('/:id', updateCigar)
+router.put('/:id', protect, updateCigar)
 
-router.delete('/:id', deleteCigar)
+router.delete('/:id', protect, deleteCigar)
 
 module.exports = router
  
