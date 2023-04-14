@@ -20,7 +20,8 @@ const userSchema = mongoose.Schema({
 
     role: {
         type: String,
-        required: [true, 'please assign a role' ],
+        default: 'user',
+        // required: [true, 'please assign a role' ],
     },
 
 }, 

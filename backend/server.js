@@ -19,6 +19,7 @@ const app = express()
 
 //Use method to utilize required API's
 app.use(express.json())
+// app.get('/', (req, res) => res.status(200).send('Hello world'))
 app.use(express.urlencoded( { extended: false} ))
 app.use('/api/cigars', require('./routes/cigarRoutes'))
 app.use('/api/users', require('./routes/userRoutes'))

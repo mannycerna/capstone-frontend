@@ -13,7 +13,7 @@ router.get('/', protect, getCigars)
 
 router.get('/:id', protect, getCigarById)
 
-router.get('/quantity', getCigarByQuantity)
+router.get('/quantity/', getCigarByQuantity)
 
 router.post('/', protect, createCigar)
 
