@@ -1,5 +1,7 @@
 {
     "recommendations": [
-        "suryadevelops.react-redux-es7-snippets"
+        "suryadevelops.react-redux-es7-snippets",
+        "rodrigovallades.es7-react-js-snippets",
+        "woodreamz.es7-react-js-snippets"
     ]
 }

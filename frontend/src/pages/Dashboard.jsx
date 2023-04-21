@@ -1,6 +1,7 @@
-import {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
+import CigarForm from '../components/CigarForm'
 
 function Dashboard() {
    const navigate = useNavigate()
@@ -9,11 +10,19 @@ function Dashboard() {
 
    useEffect(() => {
       if(!user) {
-         navigate('navigate')
+         navigate('/login')
       }
    }, [user, navigate] )
 
-   return (<div>Dashboard</div>)
+   return (<>
+      <section className='heading'>
+         <h1> Welcome <br/> {user && user.name} </h1>
+         <p>Cigar Inventory Dashboard</p>
+      </section>
+
+      <CigarForm />
+
+   </>)
 }
 
 export default Dashboard

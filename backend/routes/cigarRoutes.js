@@ -9,6 +9,7 @@ const { getCigars,
 
         const { protect } = require('../middleware/authMiddleware')
 
+//added protected routes
 router.get('/', protect, getCigars)
 
 router.get('/:id', protect, getCigarById)

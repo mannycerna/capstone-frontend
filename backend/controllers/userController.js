@@ -23,7 +23,7 @@ const registerUser = asyncHandler(async (req, res) => {
             throw new Error('Email already exists')
     }
 
-    //Hash pasword
+    //Hash password
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
 
