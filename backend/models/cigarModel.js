@@ -27,7 +27,7 @@
        required: [true, 'Please insert product name'],
             },
             
-    type: { 
+    style: { 
         type: String,
         required: [true, 'Please insert product type'],
             },

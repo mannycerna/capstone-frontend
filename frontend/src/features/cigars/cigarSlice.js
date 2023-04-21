@@ -29,6 +29,26 @@ async (cigarData, thunkAPI) => {
         }
 })
 
+//Get cigar inventory
+export const getCigars = createAsyncThunk('cigars/getAll', async (_, thunkAPI) => {
+    try{
+        const token = thunkAPI.getState().auth.user.token
+        return await cigarService.getCigars(token) 
+    }
+    catch(error) {
+        const message = 
+                (error.response && 
+                 error.response.data && 
+                 error.response.data.message) || 
+                 error.message || 
+                 error.toString()
+            return thunkAPI.rejectWithValue(message)
+     }
+}) 
+
+
+
+
 export const cigarSlice = createSlice({
     name: 'cigar',
     initialState,
@@ -46,6 +66,19 @@ export const cigarSlice = createSlice({
             state.cigars.push(action.payload)
         })
         .addCase(createCigar.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+        })
+        .addCase(getCigars.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(getCigars.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.cigars = action.payload
+        })
+        .addCase(getCigars.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload

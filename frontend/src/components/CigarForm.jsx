@@ -8,7 +8,7 @@ function CigarForm() {
     const [productid, setProductid] = useState('')
     const [name, setName] =  useState('')
     const [brand, setBrand] =  useState('')
-    const [type, setType] =  useState('')
+    const [style, setStyle] =  useState('')
     const [size, setSize] =  useState('')
     const [wrapper, setWrapper] =  useState('')
     const [binder, setBinder] =  useState('')
@@ -21,11 +21,11 @@ function CigarForm() {
     const onSubmit = e => {
         e.preventDefault()
 
-        dispatch(createCigar({productid, name, brand, type, size, wrapper, binder, filler, price, quantity}))
+        dispatch(createCigar({productid, name, brand, style, size, wrapper, binder, filler, price, quantity}))
         setProductid('')
         setName('')
         setBrand('')
-        setType('')
+        setStyle('')
         setSize('')
         setWrapper('')
         setBinder('')
@@ -39,7 +39,7 @@ function CigarForm() {
         <div className='form-group'>
             <label htmlFor='text'>ProductID</label>
             <input 
-                type='productid'
+                type='text'
                 name='productid'
                 id='productid'
                 value={productid} 
@@ -47,7 +47,7 @@ function CigarForm() {
                 />
             <label htmlFor='name'>Name</label>
            <input 
-                type = 'name'
+                type = 'text'
                 name = 'name'
                 id='name'
                 value={name}
@@ -64,10 +64,10 @@ function CigarForm() {
             <label htmlFor='type'>Type</label>
             <input 
                 type = 'text'
-                name = 'type'
-                id='type'
-                value={type}
-                onChange={(e) => setType(e.target.value)}
+                name = 'style'
+                id='style'
+                value={style}
+                onChange={(e) => setStyle(e.target.value)}
                 />
             <label htmlFor='size'>Size</label>
             <input 

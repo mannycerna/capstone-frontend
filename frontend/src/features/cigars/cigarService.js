@@ -15,7 +15,20 @@ const createCigar = async (cigarData, token) => {
     return response.data
 }
 
+//Get Cigars inventory
+const getCigars = async ( token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`  
+        }
+    }
+    const response = await axios.get(API_URL,  config)
+
+    return response.data
+}
+
 const cigarService = {
-    createCigar
+    createCigar,
+    getCigars
 }
 export default cigarService
