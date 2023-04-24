@@ -2,9 +2,10 @@ import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import CigarForm from '../components/CigarForm'
+import CigarItem from '../components/CigarItem.jsx'
 import Spinner from '../components/Spinner'
-import getCigars  from '../features/cigars/cigarSlice'
-import reset from '../features/cigars/cigarSlice'
+import {getCigars}  from '../features/cigars/cigarSlice'
+import {reset}  from '../features/auth/authSlice'
 
 function Dashboard() {
    const navigate = useNavigate()
@@ -19,17 +20,18 @@ function Dashboard() {
          
       }
 
-      if(!user) {
-         navigate('/login')
-      }
+      if (!user) {
+         navigate('/login');
+     } else {
+         dispatch(getCigars());
+         return () => {
+            dispatch(reset())
+     }
+   }
+  
+  
 
-      dispatch(getCigars())
-
-      return () => {
-         dispatch(reset())
-      }
-
-   }, [user, cigars, navigate, isError, message, dispatch] )
+   }, [user, navigate, isError, message, dispatch] )
 
    if(isLoading){
       return <Spinner />
@@ -42,6 +44,18 @@ function Dashboard() {
       </section>
 
       <CigarForm />
+
+      <section className='content'>
+        {cigars.length > 0 ? (
+          <div className='cigars'>
+            {cigars.map((cigar) => (
+              <CigarItem key={cigar._id} cigar={cigar} />
+            ))}
+          </div>
+        ) : (
+          <h3>Your account has not entered any cigars into inventory.</h3>
+        )}
+      </section>
 
    </>)
 }

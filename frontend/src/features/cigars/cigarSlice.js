@@ -46,7 +46,24 @@ export const getCigars = createAsyncThunk('cigars/getAll', async (_, thunkAPI) =
      }
 }) 
 
-
+//Delete  a cigar
+export const deleteCigar = createAsyncThunk('cigars/delete', 
+async (id, thunkAPI) => {
+    try{
+        const token = thunkAPI.getState().auth.user.token
+        return await cigarService.deleteCigar(id, token) 
+    }
+       catch(error){
+        
+            const message = 
+                (error.response && 
+                 error.response.data && 
+                 error.response.data.message) || 
+                 error.message || 
+                 error.toString()
+            return thunkAPI.rejectWithValue(message)
+        }
+})
 
 
 export const cigarSlice = createSlice({
@@ -79,6 +96,19 @@ export const cigarSlice = createSlice({
             state.cigars = action.payload
         })
         .addCase(getCigars.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+        })
+        .addCase(deleteCigar.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(deleteCigar.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.cigars = state.cigars.filter((cigar) => cigar._id !== action.payload.id)
+        })
+        .addCase(deleteCigar.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload
