@@ -13,7 +13,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: #422993;
 }
 
 p {
@@ -68,7 +68,7 @@ h3 {
 }
 
 .header ul li a:hover {
-  color: #777;
+  color: #2b2e68;
 }
 
 .header ul li a svg {
@@ -83,7 +83,7 @@ h3 {
 }
 
 .heading p {
-  color: #828282;
+  color: #18657d;
 }
 
 .goals {
@@ -145,7 +145,7 @@ h3 {
 .form-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #e6e6e6;
+  border: 1px solid #3c9396;
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: inherit;

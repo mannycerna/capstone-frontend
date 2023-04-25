@@ -5,14 +5,14 @@ import {deleteCigar} from '../features/cigars/cigarSlice'
 
 function CigarItem( {cigar}) {
     const dispatch = useDispatch()
-    
+
     return (
         <div className='cigar'>
             <div>
                   <h1>Entered into Inventory :</h1>
                   <h2>{new Date(cigar.createdAt).toLocaleString('en-US')}</h2>
             </div>
-        
+            {/* <input type = 'text' value = {cigar.name} /> */}
             <h3>{cigar.name}</h3>
             <p>{cigar.productid}</p>
             <p>{cigar.brand}</p>
@@ -23,7 +23,7 @@ function CigarItem( {cigar}) {
             <p>{cigar.filler}</p>
             <p>{cigar.price}</p>
             <p>{cigar.productid}</p>
-            <button onClick={() => dispatch(deleteCigar(cigar._id))} className='close'>X</button>
+            <button onClick={() => dispatch(deleteCigar(cigar._id))} className='close'>DELETE</button>
         </div>
     )
 }
