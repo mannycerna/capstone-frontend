@@ -1,6 +1,7 @@
 
 import {useDispatch} from 'react-redux'
 import {deleteCigar} from '../features/cigars/cigarSlice'
+import {updateCigar} from '../features/cigars/cigarSlice'
 
 
 
@@ -25,6 +26,7 @@ function CigarItem( {cigar}) {
            
             <br/>
             <button onClick={() => dispatch(deleteCigar(cigar._id))} className='close'>DELETE</button>
+            <button onClick={() => dispatch(updateCigar(cigar._id))} className='close'>EDIT</button>
         </div>
     )
 }

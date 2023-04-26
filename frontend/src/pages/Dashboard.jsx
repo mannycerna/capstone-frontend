@@ -2,6 +2,7 @@ import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import CigarForm from '../components/CigarForm'
+import UpdateCigarForm from '../components/UpdateCigarForm'
 import CigarItem from '../components/CigarItem.jsx'
 import Spinner from '../components/Spinner'
 import {getCigars}  from '../features/cigars/cigarSlice'
@@ -44,6 +45,8 @@ function Dashboard() {
       </section>
 
       <CigarForm />
+      
+      <UpdateCigarForm />
 
       <section className='content'>
         {cigars.length > 0 ? (

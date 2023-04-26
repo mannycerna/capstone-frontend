@@ -121,7 +121,7 @@ function UpdateCigarForm() {
         <div className = 'form-group'>
             <button 
             className='btn btn-block' 
-            type='submit'>Add Cigar</button>
+            type='submit'>Update Cigar</button>
         </div>
         </form>
     </section>
