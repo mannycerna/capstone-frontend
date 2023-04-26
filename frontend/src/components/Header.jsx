@@ -22,7 +22,7 @@ export default function Header() {
 
         <header className = 'header'>
             <div className = 'logo'>
-                <Link to = '/'>Enter Inventory</Link>
+                <Link to = '/'>Home</Link>
             </div>
             <ul>
                {user ? (

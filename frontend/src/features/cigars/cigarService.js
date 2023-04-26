@@ -27,6 +27,19 @@ const getCigars = async (token) => {
     return response.data
 }
 
+//Update Cigars inventory
+const updateCigar = async (cigarData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`  
+        }
+    }
+    const response = await axios.put(API_URL, cigarData, config)
+
+    return response.data
+}
+
+
 //Delete Cigars inventory
 const deleteCigar = async (cigarId, token) => {
     const config = {
@@ -43,6 +56,7 @@ const deleteCigar = async (cigarId, token) => {
 const cigarService = {
     createCigar,
     getCigars,
+    updateCigar,
     deleteCigar
 }
 export default cigarService

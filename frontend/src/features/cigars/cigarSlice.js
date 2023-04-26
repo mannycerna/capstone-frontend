@@ -46,6 +46,25 @@ export const getCigars = createAsyncThunk('cigars/getAll', async (_, thunkAPI) =
      }
 }) 
 
+//Update a cigar
+export const updateCigar = createAsyncThunk('cigars/update', 
+async (cigarData, thunkAPI) => {
+    try{
+        const token = thunkAPI.getState().auth.user.token
+        return await cigarService.updateCigar(cigarData, token) 
+    }
+       catch(error){
+        
+            const message = 
+                (error.response && 
+                 error.response.data && 
+                 error.response.data.message) || 
+                 error.message || 
+                 error.toString()
+            return thunkAPI.rejectWithValue(message)
+        }
+})
+
 //Delete  a cigar
 export const deleteCigar = createAsyncThunk('cigars/delete', 
 async (id, thunkAPI) => {
